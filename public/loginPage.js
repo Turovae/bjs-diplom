@@ -1,12 +1,6 @@
 "use strict"
 
-console.log('file userform is used');
-
-console.log(UserForm);
-
 const userForm = new UserForm();
-
-console.log(userForm);
 
 userForm.loginFormCallback = function(data) {
     ApiConnector.login( data, (respond) => {

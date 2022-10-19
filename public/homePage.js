@@ -32,7 +32,6 @@ const moneyManager = new MoneyManager();
 
 // Пополнение кошелька
 moneyManager.addMoneyCallback = (data) => {
-    console.log(data);
     ApiConnector.addMoney(data, (response) => {
         if (response.success) {
             ProfileWidget.showProfile(response.data);
@@ -81,7 +80,6 @@ ApiConnector.getFavorites((response) => {
 });
 
 favoritesWidget.addUserCallback = (data) => {
-    console.log(data);
 
     ApiConnector.addUserToFavorites(data, (response) => {
         console.log(response);
@@ -97,7 +95,6 @@ favoritesWidget.addUserCallback = (data) => {
 };
 
 favoritesWidget.removeUserCallback = (userId) => {
-    console.log(userId);
 
     ApiConnector.removeUserFromFavorites(userId, (response) => {
         if (response.success) {
