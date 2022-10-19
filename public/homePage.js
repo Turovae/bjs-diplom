@@ -1,10 +1,7 @@
-// const { response } = require("express");
-
 const logoutButton = new LogoutButton();
 
 logoutButton.action = () => {
     ApiConnector.logout((respond) => {
-        // console.log(respond);
         if (respond.success) {
             location.reload();
         }
@@ -12,26 +9,20 @@ logoutButton.action = () => {
 };
 
 ApiConnector.current((response) => {
-    // console.log(response);
     if (response.success) {
-        // console.log(response.data);
         ProfileWidget.showProfile(response.data);
     }
 });
 
 const ratesBoard = new RatesBoard();
 
-// console.log(ratesBoard);
-
 const getStocks = () => {
     ApiConnector.getStocks((stocks) => {
-        // console.log(stocks);
         if (stocks.success) {
             ratesBoard.clearTable();
             ratesBoard.fillTable(stocks.data);
         }
     });
-    // console.log('getStocks');
 };
 
 getStocks();
@@ -43,20 +34,17 @@ const moneyManager = new MoneyManager();
 moneyManager.addMoneyCallback = (data) => {
     console.log(data);
     ApiConnector.addMoney(data, (response) => {
-        // console.log(response);
         if (response.success) {
             ProfileWidget.showProfile(response.data);
             moneyManager.setMessage(response.success, "Баланс пополнен");
         } else {
             moneyManager.setMessage(response.success, response.error);
         }
-        
     });
 };
 
 // Конвертация валют
 moneyManager.conversionMoneyCallback = (data) => {
-    // console.log(data);
 
     ApiConnector.convertMoney(data, (response) => {
         if (response.success) {
@@ -70,7 +58,6 @@ moneyManager.conversionMoneyCallback = (data) => {
 
 // Перевод валюты
 moneyManager.sendMoneyCallback = (data) => {
-    console.log(data);
 
     ApiConnector.transferMoney(data, (response) => {
         if (response.success) {
@@ -86,7 +73,6 @@ moneyManager.sendMoneyCallback = (data) => {
 const favoritesWidget = new FavoritesWidget();
 
 ApiConnector.getFavorites((response) => {
-    // console.log(response);
     if (response.success) {
         favoritesWidget.clearTable();
         favoritesWidget.fillTable(response.data);
